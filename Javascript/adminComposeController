@@ -1,0 +1,44 @@
+(function () {
+    angular.module(APP.NAME)
+        .controller('adminComposeController', AdminComposeController);
+
+    AdminComposeController.$inject = ["$state", 'adminContactService', "$stateParams", "toastr"]
+
+    function AdminComposeController($state, adminContactService, $stateParams, toastr) {
+
+        var vm = this;
+
+        vm.reply = null;
+
+        vm.onSendBtnClicked = _onSendBtnClicked;
+
+        vm.$onInit = _onInit;
+
+        function _onInit() {
+
+            vm.reply = $stateParams.message;
+
+            vm.reply.to = vm.reply.email;
+
+           
+        }
+
+
+        function _onSendBtnClicked() {
+
+            event.preventDefault();
+            adminContactService.sendReply(vm.reply, _onAddContactSuccess, _onAddContactError);
+
+        }
+
+
+
+        function _onAddContactSuccess(response) {
+            toastr.success("You have successfully sent an email");
+        };
+        function _onAddContactError(response) {
+            toastr.error("Error");
+        };
+    };
+})();
+
