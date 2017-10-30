@@ -1,0 +1,36 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Blogs_DeleteById]    Script Date: 10/30/2017 3:43:48 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Blogs_DeleteById]
+	@Id int
+
+
+	/*
+SELECT *
+FROM dbo.Blogs
+WHERE Id = 3
+
+Execute dbo.Blogs_DeleteById
+	@Id = 3
+
+SELECT *
+FROM dbo.Blogs
+WHERE Id = 3
+
+	*/
+
+	as
+
+	BEGIN
+
+DELETE FROM [dbo].[Blogs]
+      WHERE Id = @Id
+
+END
+
+
