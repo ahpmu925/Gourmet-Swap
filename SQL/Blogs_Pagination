@@ -1,0 +1,57 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Blogs_Pagination]    Script Date: 10/30/2017 3:45:10 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER proc [dbo].[Blogs_Pagination]
+		@PageNumber int
+		,@RecsPerPage int
+	
+
+			/* --------- TEST CODE ----------
+
+	DECLARE @PageNumber int = 0
+			,@RecsPerPage int = 10
+			
+			
+
+	EXECUTE dbo.Blogs_Pagination
+						@PageNumber
+						,@RecsPerPage
+						
+
+						
+*/
+
+AS
+
+
+BEGIN 
+
+    (
+      SELECT 
+
+       [Id]
+      ,[Title]
+      ,[Body]
+      ,[IsPublished]
+	  ,[UserId]
+	  ,[DateAdded]
+	  ,[DateModified]
+	  ,[TotalCount] = COUNT(*) OVER()
+  FROM [dbo].[Blogs]
+ 
+  )
+  	    ORDER BY Id
+		OFFSET @RecsPerPage  * (@PageNumber - 0) ROWS
+		FETCH NEXT @RecsPerPage ROWS ONLY;
+		
+	    
+	
+
+END
+
