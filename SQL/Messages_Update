@@ -1,0 +1,81 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Messages_Update]    Script Date: 10/30/2017 3:41:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[Messages_Update]
+             @FirstName nvarchar(50)
+		, @LastName nvarchar(50)
+		, @Email nvarchar(128)
+		, @PhoneNo nvarchar(50)
+		, @City nvarchar(50)
+		, @Address nvarchar(50)
+		, @Message nvarchar(128)
+		, @Id int 
+		, @UserId int
+
+		
+
+		/*
+Declare @Id int = 217
+
+SELECT *
+	FROM dbo.Messages
+	WHERE Id = @Id
+
+Declare @FirstName nvarchar(50) = 'John'
+		, @LastName nvarchar(50) = 'Doe'
+		, @Email nvarchar(128) = 'jd@gmail.com'
+		, @PhoneNo nvarchar(50) = '1234567898'
+		, @City nvarchar(50) = 'Culver City'
+		, @Address nvarchar(50) = '400 Corporate Pointe'
+		, @Message nvarchar(128) = 'Nation'
+		, @UserId int = '5'
+
+	
+		
+
+Execute dbo.Messages_Update
+		@FirstName
+		, @LastName
+		, @Email
+		, @PhoneNo
+		, @City
+		, @Address
+		, @Message
+		, @Id 
+		, @UserId
+		
+
+
+	SELECT *
+	FROM dbo.Messages
+	WHERE Id = @Id
+
+	*/
+
+as
+
+
+BEGIN
+
+Declare @DateModified datetime2(7) = GETUTCDATE()
+
+UPDATE [dbo].[Messages]
+   SET [DateModified] = @DateModified
+      ,[FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[Email] = @Email
+      ,[PhoneNo] = @PhoneNo
+      ,[City] = @City
+      ,[Address] = @Address
+      ,[Message] = @Message
+	  ,[UserId] = @UserId
+
+ WHERE Id = @Id
+
+ END
+
+
