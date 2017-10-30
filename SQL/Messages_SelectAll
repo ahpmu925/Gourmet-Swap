@@ -1,0 +1,37 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Messages_SelectAll]    Script Date: 10/30/2017 3:40:20 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Messages_SelectAll]
+
+
+/*
+
+Execute dbo.Messages_SelectAll
+
+	*/
+
+	as
+
+	BEGIN
+
+SELECT [Id]
+      ,[FirstName]
+      ,[LastName]
+      ,[Email]
+      ,[PhoneNo]
+      ,[City]
+      ,[Address]
+      ,[Message]
+	  ,[UserId]
+      ,[DateAdded]
+      ,[DateModified]
+	  ,[Status]
+  FROM [dbo].[Messages]
+
+
+END
