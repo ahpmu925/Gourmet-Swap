@@ -1,0 +1,52 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Messages_UpdateStatus]    Script Date: 10/30/2017 3:42:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[Messages_UpdateStatus]
+                @Id int 
+		     ,@UserId int
+             ,@Status int
+
+			  
+		/*
+Declare @Id int = 217
+
+SELECT *
+	FROM dbo.Messages
+	WHERE Id = @Id
+
+Declare   @UserId int = '5'
+		, @Status int = '1'
+		
+
+Execute dbo.Messages_UpdateStatus
+		@Id 
+		, @UserId
+		, @Status
+		
+
+
+	SELECT *
+	FROM dbo.Messages
+	WHERE Id = @Id
+
+	*/
+
+as
+
+BEGIN
+
+Declare @DateModified datetime2(7) = GETUTCDATE()
+
+UPDATE [dbo].[Messages]
+   SET 
+       [DateModified] = @DateModified
+       ,[UserId] = @UserId
+	  ,[Status] = @Status
+ WHERE Id = @Id
+ 
+ END
+
