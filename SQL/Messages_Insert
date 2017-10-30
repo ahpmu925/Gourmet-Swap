@@ -1,0 +1,82 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Messages_Insert]    Script Date: 10/30/2017 3:37:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[Messages_Insert]
+          @FirstName nvarchar(50)
+		, @LastName nvarchar(50)
+		, @Email nvarchar(128)
+		, @PhoneNo nvarchar(50)
+		, @City nvarchar(50)
+		, @Address nvarchar(50)
+		, @Message nvarchar(128)
+		, @Id int OUTPUT
+		, @UserId int
+		
+
+		/*
+Declare @Id int = 0
+
+Declare @FirstName nvarchar(50) = 'Andy'
+		, @LastName nvarchar(50) = 'Park'
+		, @Email nvarchar(128) = 'ap@gmail.com'
+		, @PhoneNo nvarchar(50) = '1234567890'
+		, @City nvarchar(50) = 'Test'
+		, @Address nvarchar(50) = '123 Abc St'
+		, @Message nvarchar(128) = 'Test'
+	    , @UserId  int = 3
+		
+
+Execute dbo.Messages_Insert
+		@FirstName
+		, @LastName
+		, @Email
+		, @PhoneNo
+		, @City
+		, @Address
+		, @Message
+		, @Id OUTPUT
+		, @UserId
+		
+		
+
+
+	SELECT *
+	FROM dbo.Messages
+	WHERE Id = @Id
+	*/
+
+as
+
+
+BEGIN
+
+INSERT INTO [dbo].[Messages]
+           ([FirstName]
+           ,[LastName]
+           ,[Email]
+           ,[PhoneNo]
+           ,[City]
+           ,[Address]
+           ,[Message]
+		   ,[UserId]
+		   )
+     VALUES
+           (@FirstName
+           ,@LastName
+           ,@Email
+           ,@PhoneNo
+           ,@City
+           ,@Address
+           ,@Message
+		   ,@UserId
+		   )
+
+SET @Id = SCOPE_IDENTITY();
+
+
+END
+
