@@ -1,0 +1,38 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Blogs_SelectAll]    Script Date: 10/30/2017 3:45:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Blogs_SelectAll]
+
+
+/*
+
+Execute dbo.Blogs_SelectAll
+
+	*/
+
+	as
+
+	BEGIN
+
+SELECT [Id]
+      ,[Title]
+      ,[Body]
+      ,[IsPublished]
+      ,[UserId]
+      ,[DateAdded]
+      ,[DateModified]
+  FROM [dbo].[Blogs]
+
+
+    Select	BlogId, BlogCategoryId 
+     From   [dbo].[BlogPostCategories] 
+
+
+END
+
+
