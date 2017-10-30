@@ -1,0 +1,82 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Blogs_Insert]    Script Date: 10/30/2017 3:44:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Blogs_Insert]
+          @IntIdTable IntIdTable readOnly --passing a parameter.
+         , @Title nvarchar(50)
+		, @Body nvarchar(128)
+		, @IsPublished bit 
+		, @Id int OUTPUT
+		, @UserId int
+
+				/*
+
+Declare @Id int = 0;
+
+Declare @Title nvarchar(50) = 'Hello'
+		, @Body nvarchar(128) = 'Welcome'
+		, @IsPublished int = 1
+		, @UserId int = '3'
+		, @IntIdTable IntIdTable 
+		, @BlogId int = 10
+		, @BlogCategoryId int = 11
+
+		Insert INTO @IntIdTable
+		values (1), (2), (3)
+
+
+Execute dbo.Blogs_Insert
+        @IntIdTable 
+        ,@Title
+		, @Body
+		, @IsPublished 
+		, @Id OUTPUT
+		, @UserId
+				
+
+
+	SELECT *
+	FROM dbo.Blogs
+    Where Id = @Id
+
+	Select *
+	FROM dbo.BlogPostCategories
+	Where BlogId = @Id
+
+
+	*/
+
+as
+
+
+BEGIN
+
+INSERT INTO [dbo].[Blogs]
+           ([Title]
+           ,[Body]
+           ,[IsPublished]
+		   ,[UserId]
+		   )
+     VALUES
+           (@Title
+           ,@Body
+           ,@IsPublished
+		   ,@UserId
+		   )
+
+
+SET @Id = SCOPE_IDENTITY();
+
+INSERT INTO dbo.BlogPostCategories (BlogId, BlogCategoryId) -- passing columns into a table
+				select @Id, data 
+				from @IntIdTable
+
+
+END
+
+
