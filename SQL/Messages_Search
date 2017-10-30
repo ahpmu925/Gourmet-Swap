@@ -1,0 +1,97 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Messages_Search]    Script Date: 10/30/2017 3:39:55 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Messages_Search]
+
+           	@PageNumber int
+		   ,@RecsPerPage int
+		   ,@Status int
+		   ,@SearchTerm nvarchar(50) = null
+          
+
+	      
+	
+
+		/* -------- TEST CODE/ DESCRIPTION  
+
+	- Used within dbo.Messages_Pagination
+	- to insert into my messageDefinded table @PageInfo
+		
+	DECLARE @PageNumber int = 0
+			,@RecsPerPage int = 10
+			,@Status int = 3
+			,@SearchTerm nvarchar(50) = 'Alex'
+			
+
+	EXECUTE dbo.Messages_Search
+						@PageNumber
+						,@RecsPerPage
+						,@Status
+						,@SearchTerm
+
+											
+*/       
+
+
+AS
+
+
+				BEGIN
+
+				IF(@SearchTerm IS NOT NULL)
+
+				BEGIN
+				;WITH sampletbl
+					AS
+						(
+
+		              SELECT Id
+					  ,FirstName
+					  ,LastName
+		              ,Email
+		              ,PhoneNo
+		              ,City
+		              ,Address
+		              ,Message
+		              ,UserId
+		              ,DateAdded
+	                 ,DateModified
+		             ,Status
+			          ,TotalCount = COUNT(*) OVER()
+					 FROM dbo.Messages as messages
+		               WHERE Status = @Status
+		
+		AND 
+                            (FirstName like
+							case when @SearchTerm IS NOT NULL
+								then @SearchTerm + '%' 
+								else FirstName	
+								end
+							OR
+							LastName like
+							case when @SearchTerm IS NOT NULL
+								then @SearchTerm + '%' 
+								else LastName	
+								end
+							OR
+							Email like
+							case when @SearchTerm IS NOT NULL
+								then @SearchTerm + '%' 
+								else Email 
+								end)
+
+								ORDER BY Id
+	                        	OFFSET @RecsPerPage  * (@PageNumber - 0) ROWS
+	                             	FETCH NEXT @RecsPerPage ROWS ONLY
+									)
+								SELECT * 
+					         FROM sampletbl
+								END
+	  
+				END				
+						 
