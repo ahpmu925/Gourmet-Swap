@@ -1,0 +1,97 @@
+USE [C40_GSwap]
+GO
+/****** Object:  StoredProcedure [dbo].[Blogs_Update]    Script Date: 10/30/2017 3:46:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER proc [dbo].[Blogs_Update]
+           @IntIdTable IntIdTable readOnly
+        ,  @Title nvarchar(50)
+		, @Body nvarchar(128)
+		, @IsPublished bit 
+		, @Id int 
+	    , @UserId int
+	
+	
+		/*
+
+Declare @Id int = 39
+
+SELECT *
+	FROM dbo.Blogs
+	WHERE Id = @Id
+
+Declare @Title nvarchar(50) = 'How are you'
+		, @Body nvarchar(128) = 'It is November soon!'
+		, @IsPublished int = 0
+		, @UserId int = '5'
+		, @IntIdTable IntIdTable 
+		, @BlogId int = 0
+		
+ 
+ 	Insert INTO @IntIdTable
+		values (1)
+
+	
+Execute dbo.Blogs_Update
+         @IntIdTable 
+		, @Title
+		, @Body
+		, @IsPublished 
+		, @Id 
+		, @UserId
+
+
+	SELECT *
+	FROM dbo.Blogs
+	WHERE Id = @Id
+
+	Select *
+	FROM dbo.BlogPostCategories
+	Where BlogId = @Id
+
+	*/
+
+
+	as
+
+
+BEGIN
+
+	
+           Declare @BlogItemId int = 0;
+
+           SELECT @BlogItemId = UserId
+			FROM dbo.Blogs
+			WHERE UserId = @UserId  
+
+			IF(@UserId <> @BlogItemId)
+			BEGIN
+				;THROW 51000, 'Cannot update. UserId provided is not the owner of the file', 1;
+			END
+			
+
+Delete from [dbo].[BlogPostCategories]
+			Where BlogId = @Id
+
+Declare @DateModified datetime2(7) = GETUTCDATE()
+
+UPDATE [dbo].[Blogs]
+   SET [DateModified] = @DateModified
+      ,[Title] = @Title
+      ,[Body] = @Body
+      ,[IsPublished] = @IsPublished
+	  ,[UserId] = @UserId 
+
+ WHERE Id = @Id
+
+
+
+INSERT INTO dbo.BlogPostCategories (BlogId, BlogCategoryId) -- passing cloumns into a table
+				select @Id, data 
+				from @IntIdTable
+END
+
+
