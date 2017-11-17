@@ -108,8 +108,7 @@ namespace GSwap.Services
                     {
 
 
-                        //int startingIndex = 0;
-                        //blog.Ids = reader.GetSafeInt32(startingIndex++);
+                     
 
 
                         if (myIntegers == null)
@@ -125,14 +124,7 @@ namespace GSwap.Services
 
 
             _dataProvider.ExecuteCmd("dbo.Blogs_SelectById", inputParamDelegate, singleRecMapper);
-            //int ten = 10;
-            //int eleven = 11;
-            //int twelve = 12;
-
-
-            //myIntegers.Add(ten);
-            //myIntegers.Add(eleven);
-            //myIntegers.Add(twelve);
+           
             blog.Ids = myIntegers;
             return blog;
 
@@ -377,7 +369,6 @@ namespace GSwap.Services
                 paramCollection.AddWithValue("@RecsPerPage", pagesize);
 
 
-                //strings have to match the stored proc parameter names
             };
 
 
