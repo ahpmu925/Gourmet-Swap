@@ -59,7 +59,7 @@
             if (vm.messages != null) {
                 for (var i = 0; i < vm.messages.length; i++) {
                     var currentMessage = vm.messages[i];
-                    //Do not use vm.messages below this line inside the loop
+                
 
 
                     currentMessage.dateAdded = moment(currentMessage.dateAdded).format('MM-DD-YYYY');
