@@ -49,21 +49,7 @@
 
         };
 
-        //    function _checkBox(category) {
-
-        //        if (vm.blog.ids.indexOf(category) != -1) {
-
-        //            return true;
-
-        //        }
-
-        //        else {
-        //            return false;
-        //        }
-        //    }
-        //}
-
-
+       
 
         function _onCreateBtnClicked() {
 
