@@ -1,0 +1,49 @@
+<style>
+    #reply {
+        background-color: #242a30;
+    }
+
+    #archive {
+        background-color: #242a30;
+    }
+
+</style>
+
+<div class="email-btn-row hidden-xs">
+    <a href="#" class="btn btn-sm btn-default" id="reply" ng-disabled="!adminEmailCtrl.enableReplyBtn" ng-click="adminEmailCtrl.replyEmail()">Reply</a>
+    <a href="#" class="btn btn-sm btn-default" id="archive" ng-disabled="!adminEmailCtrl.enableArchiveBtn" ng-click="adminEmailCtrl.updateArchive()" ng-show="adminEmailCtrl.showArchive">Archive</a>
+</div>
+<div class="email-content">
+    <table class="table table-email">
+        <thead>
+            <tr>
+                <th class="email-select"><input type="checkbox" ng-checked="adminEmailCtrl.selectedAll" ng-model="adminEmailCtrl.selectedAll" ng-click="adminEmailCtrl.checkAll()" /></th>
+                <th colspan="2">
+                  
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="item in adminEmailCtrl.messages">
+                <td class="email-select"><input type="checkbox" ng-model="item.selected" ng-click="adminEmailCtrl.checkBox(item)" /></td>
+                <td class="email-sender" ng-click="adminEmailCtrl.toMessage(item)">
+                    {{item.firstName + ' ' + item.lastName}}
+
+                </td>
+                <td class="email-subject">
+                    {{'Contact Us Message From ' + item.email}}
+                </td>
+                <td class="email-date">{{item.dateAdded}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <span ng-show="!adminEmailCtrl.messages.length">No messages matched your search. Try searching again.</span>
+</div>
+<div class="email-footer clearfix">
+    <p>{{adminEmailCtrl.totalCount}} messages</p>
+    <ul uib-pagination ng-model="adminEmailCtrl.currentPage"
+        total-items="adminEmailCtrl.totalCount"
+        max-size="adminEmailCtrl.maxSize"
+        ng-change="adminEmailCtrl.pageChanged()"
+        boundary-links="true"></ul>
+
+</div>
