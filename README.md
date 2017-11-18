@@ -11,7 +11,6 @@ Strategy – Using SQL built data tables and store procedures, a C# service clas
 
 
 
-
 Upon message submission after passing the validations on Contact Us page, user's message is sent to an Admin Email Inbox and gets saved in the database. 
 
 Admin is able to select received messages by individual checkboxes or select them all. Unread messages have a default status of 1. Archive button is enabled when a message or messages are checked. The status of a selected message is changed to 2 upon clicking on archive button and gets sent to a archive page. Status of a message is changed to 3 after it is read. Read messages are stored in a read page. Admin is able to search a message by customer's first name, last name, and email address. Reply button is only enabled when a single message is checked and an admin is able to reply to a customer using SendGrid email Api. 
