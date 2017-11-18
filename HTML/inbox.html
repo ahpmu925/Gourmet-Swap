@@ -1,0 +1,31 @@
+        <!-- begin #content -->
+<div class="p-20">
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-2 -->
+        <div class="col-md-2">
+            <form>
+                <div class="input-group m-b-15">
+                    <input type="text" class="form-control input-sm input-white" ng-model="adminInboxCtrl.searchTerm" placeholder="Search Mail" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-sm btn-inverse" type="button" ng-click="adminInboxCtrl.onSearchClicked()"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+            <div class="hidden-sm hidden-xs">
+                <h5 class="m-t-20">Email</h5>
+                <ul class="nav nav-pills nav-stacked nav-inbox">
+                    <li><a href="unread"><i class="fa fa-inbox fa-fw m-r-5"></i> Inbox (10)</a></li>
+                     <li><a href="read"><i class="fa fa-book fa-fw m-r-5"></i> Read</a></li>
+                    <li><a href="archive"><i class="fa fa-star fa-fw m-r-5"></i> Archive</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end col-2 -->
+        <!-- begin col-10 -->
+        <div class="col-md-10" ui-view>
+        </div>
+        <!-- end col-10 -->
+    </div>
+    <!-- end row -->
+</div>           
